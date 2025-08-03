@@ -3,7 +3,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { Request } from 'express';
 import { User } from './users/users.entity';
 
-interface RequestWithUser extends Request {
+export interface RequestWithUser extends Request {
   user: User;
 }
 
@@ -15,7 +15,7 @@ export class AppController {
     return {
       id: request.user.id,
       username: request.user.username,
-      role: request.user.role,
+      roles: request.user.roles,
       status: request.user.status,
     };
   }

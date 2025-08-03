@@ -7,8 +7,12 @@
 
 <script setup>
 import { ref } from "vue"
+import { useStore } from "vuex"
 
+const store = useStore();
 const username = ref("")
+
+username.value = store.getters.currentUser
 </script>
 
 <style scoped>

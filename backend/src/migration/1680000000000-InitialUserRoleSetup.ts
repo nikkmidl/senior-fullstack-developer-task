@@ -9,16 +9,18 @@ export class InitialUserRoleSetup1680000000000 implements MigrationInterface {
                 CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     username TEXT NOT NULL UNIQUE,
-                    role TEXT NOT NULL DEFAULT 'User',
+                    roles JSONB NOT NULL DEFAULT '["User"]',
                     status INTEGER NULL
                 )
             `);
 
       await queryRunner.query(`
-                INSERT OR IGNORE INTO users (username, role, status) VALUES
-                ('admin_user', 'Admin', 1),
-                ('regular_user', 'User', 1),
-                ('editor_user', 'Editor', 1)
+                INSERT OR IGNORE INTO users (username, roles, status) VALUES
+                ('admin_user', '["Admin"]', 'ENABLED'),
+                ('regular_user', '["User"]', 'ENABLED'),
+                ('editor_user', '["Editor"]', 'ENABLED'),
+                ('disabled_user', '["Editor"]', 'DISABLED'),
+                ('deleted_user', '["Editor"]', 'DELETED')
             `);
     } catch (error) {
       console.error('Migration up error:', error);

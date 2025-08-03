@@ -2,13 +2,20 @@ import { createStore } from "vuex"
 
 export default createStore({
 	state: {
-		// Define your state here
+		error: undefined,
+		currentUser: undefined,
+		roles: []
 	},
 	getters: {
-		// Define your getters here
+		state(state) { return state },
+		roles(state) { return state.roles },
+		currentUser(state) { return state.currentUser },
+		error(state) { return state.error }
 	},
 	mutations: {
-		// Define your mutations here
+		setCurrentUser(state, username) { state.currentUser = username },
+		setRoles(state, roles) { state.roles = roles },
+		setError(state, error) { state.error = error },
 	},
 	actions: {
 		// Define your actions here
